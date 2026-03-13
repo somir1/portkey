@@ -21,17 +21,24 @@ Plug it in, customize it, ship it.
 ---
 ## Architecture
 
-    Next.js Client
-            │
-            │ GraphQL
-            ▼
-    FastAPI + Strawberry
-            │
-    Authentication Layer
-            │
-    SQLAlchemy ORM
-            │
-    SQLite (dev) / PostgreSQL (prod)
+## Architecture
+
+Next.js Client
+        │
+        ▼
+GraphQL API
+        │
+        ▼
+FastAPI + Strawberry
+        │
+        ▼
+Authentication Layer
+        │
+        ▼
+SQLAlchemy ORM
+        │
+        ▼
+SQLite (dev) / PostgreSQL (prod)
 
 ---
 ## Roadmap
@@ -79,7 +86,6 @@ Plug it in, customize it, ship it.
 
 ## Project Structure
 
-    \```
     portkey/
     ├── api/                        
     │   ├── main.py                 
@@ -107,7 +113,6 @@ Plug it in, customize it, ship it.
     ├── .env.example
     ├── docker-compose.yml
     └── README.md
-    \```
 
 ---
 
