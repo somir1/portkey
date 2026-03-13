@@ -14,7 +14,7 @@ Plug it in, customize it, ship it.
 
 **Backend:** FastAPI, Strawberry GraphQL, SQLAlchemy, SQLite → PostgreSQL  
 **Frontend:** Next.js, React, Apollo Client, Tailwind CSS  
-**Auth:** JWT, bcrypt, OAuth (v3)  
+**Auth:** JWT, Argon2 (Passlib), OAuth (v3)
 **Testing:** Pytest, Jest, React Testing Library  
 **Deployment:** (coming in v3)
 
@@ -40,12 +40,12 @@ SQLite (dev) / PostgreSQL (prod)
 - [x] Project setup and folder structure
 - [x] FastAPI app entry point
 - [x] SQLAlchemy + SQLite setup and User model
-- [x] Password hashing with bcrypt
+- [x] Password hashing with Argon2
 - [x] Register mutation
-- [ ] Login mutation with JWT access + refresh token
-- [ ] Logout mutation
+- [x] Login mutation with JWT access + refresh token
+- [x] Logout mutation
 - [ ] Refresh token endpoint
-- [ ] Protected `me` query with JWT auth guard
+- [x] Protected `me` query with JWT auth guard
 - [ ] Input validation and error handling
 - [ ] Rate limiting on auth endpoints
 - [ ] Pytest tests for all auth endpoints
@@ -65,6 +65,7 @@ SQLite (dev) / PostgreSQL (prod)
 ### V3 — Open Source Ready
 - [ ] Email verification on signup
 - [ ] Password reset flow
+- [ ] RBAC
 - [ ] Google OAuth
 - [ ] GitHub OAuth
 - [ ] Migrate SQLite to PostgreSQL
