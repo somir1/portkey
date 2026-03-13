@@ -21,17 +21,17 @@ Plug it in, customize it, ship it.
 ---
 ## Architecture
 
-Next.js Client
-        │
-        │ GraphQL
-        ▼
-FastAPI + Strawberry
-        │
-Authentication Layer
-        │
-SQLAlchemy ORM
-        │
-SQLite (dev) / PostgreSQL (prod)
+    Next.js Client
+            │
+            │ GraphQL
+            ▼
+    FastAPI + Strawberry
+            │
+    Authentication Layer
+            │
+    SQLAlchemy ORM
+            │
+    SQLite (dev) / PostgreSQL (prod)
 
 ---
 ## Roadmap
@@ -79,35 +79,35 @@ SQLite (dev) / PostgreSQL (prod)
 
 ## Project Structure
 
-
-portkey/
-├── api/                        
-│   ├── main.py                 
-│   ├── schema.py               
-│   ├── database.py             
-│   ├── resolvers/              
-│   │   ├── auth.py             
-│   │   └── user.py             
-│   ├── services/               
-│   │   ├── auth_service.py     
-│   │   └── user_service.py     
-│   ├── models/
-│   │   └── user.py             
-│   ├── middleware/             
-│   └── tests/                  
-│       ├── test_auth.py
-│       └── test_user.py
-├── client/                     
-│   ├── app/
-│   │   ├── page.tsx            
-│   │   ├── register/
-│   │   └── dashboard/
-│   ├── components/
-│   └── lib/
-├── .env.example
-├── docker-compose.yml
-└── README.md
-
+    \```
+    portkey/
+    ├── api/                        
+    │   ├── main.py                 
+    │   ├── schema.py               
+    │   ├── database.py             
+    │   ├── resolvers/              
+    │   │   ├── auth.py             
+    │   │   └── user.py             
+    │   ├── services/               
+    │   │   ├── auth_service.py     
+    │   │   └── user_service.py     
+    │   ├── models/
+    │   │   └── user.py             
+    │   ├── middleware/             
+    │   └── tests/                  
+    │       ├── test_auth.py
+    │       └── test_user.py
+    ├── client/                     
+    │   ├── app/
+    │   │   ├── page.tsx            
+    │   │   ├── register/
+    │   │   └── dashboard/
+    │   ├── components/
+    │   └── lib/
+    ├── .env.example
+    ├── docker-compose.yml
+    └── README.md
+    \```
 
 ---
 
@@ -116,6 +116,107 @@ portkey/
 Coming soon — setup instructions will be added when V1 is complete.
 
 ---
+
+## Authentication Endpoints
+
+## Register
+
+Creates a new user account.
+
+    mutation {
+        register(
+            email: "user@example.com"
+            password: "Password123!"
+            firstName: "John"
+            lastName: "Doe"
+        ) {
+            accessToken
+            refreshToken
+            userId
+            email
+            firstName
+            lastName
+            }
+    }
+
+## What it does
+
+    Creates a new user in the database
+    Hashes the password using Argon2
+    Generates JWT access and refresh tokens
+    Stores the refresh token in the database
+    Returns authentication tokens and user info
+
+---
+
+## Login
+
+Authenticates an existing user.
+
+    mutation {
+        login(
+            email: "user@example.com"
+            password: "Password123!"
+        ) {
+            accessToken
+            refreshToken
+            userId
+            email
+            firstName
+            lastName
+        }
+    }
+
+## What it does
+
+    Verifies the user's email and password
+    Generates new access and refresh tokens
+    Updates the stored refresh token
+    Returns authentication tokens and user info
+
+---
+
+## Logout
+
+Logs the current user out.
+
+    mutation {
+        logout {
+            success
+            message
+        }
+    }
+
+    Headers
+        Authorization: Bearer <access_token>     
+## What it does
+
+    Validates the user's JWT token
+    Clears the stored refresh token from the database
+    Invalidates the current login session
+
+---
+## Me
+
+Returns the currently authenticated user.
+
+    query {
+        me {
+            id
+            email
+            firstName
+            lastName
+        }
+    }
+
+    Headers
+        Authorization: Bearer <access_token>     
+## What it does
+
+    Validates the JWT access token
+    Loads the user from the database
+    Returns the authenticated user's profile
+
 
 ## License
 
