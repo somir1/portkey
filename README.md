@@ -79,7 +79,7 @@ SQLite (dev) / PostgreSQL (prod)
 
 ## Project Structure
 
-\```
+
 portkey/
 ├── api/                        
 │   ├── main.py                 
@@ -107,7 +107,7 @@ portkey/
 ├── .env.example
 ├── docker-compose.yml
 └── README.md
-\```
+
 
 ---
 
