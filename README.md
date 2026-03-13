@@ -41,7 +41,7 @@ SQLite (dev) / PostgreSQL (prod)
 - [x] FastAPI app entry point
 - [x] SQLAlchemy + SQLite setup and User model
 - [x] Password hashing with bcrypt
-- [ ] Register mutation
+- [x] Register mutation
 - [ ] Login mutation with JWT access + refresh token
 - [ ] Logout mutation
 - [ ] Refresh token endpoint
