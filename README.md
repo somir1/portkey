@@ -1,7 +1,11 @@
 # Portkey 🔐
 
-A lightweight, open source SSO boilerplate built with 
+Portkey is a lightweight authentication and SSO starter built with
 FastAPI, Strawberry GraphQL, SQLAlchemy, and Next.js.
+
+It provides a simple foundation for building apps that need authentication,
+OAuth login, and a modern API layer without the complexity of large auth frameworks.
+
 Plug it in, customize it, ship it.
 
 ---
@@ -15,14 +19,28 @@ Plug it in, customize it, ship it.
 **Deployment:** (coming in v3)
 
 ---
+## Architecture
 
+Next.js Client
+        │
+        │ GraphQL
+        ▼
+FastAPI + Strawberry
+        │
+Authentication Layer
+        │
+SQLAlchemy ORM
+        │
+SQLite (dev) / PostgreSQL (prod)
+
+---
 ## Roadmap
 
 ### V1 — Core API
 - [x] Project setup and folder structure
 - [x] FastAPI app entry point
 - [x] SQLAlchemy + SQLite setup and User model
-- [ ] Password hashing with bcrypt
+- [x] Password hashing with bcrypt
 - [ ] Register mutation
 - [ ] Login mutation with JWT access + refresh token
 - [ ] Logout mutation
@@ -31,7 +49,7 @@ Plug it in, customize it, ship it.
 - [ ] Input validation and error handling
 - [ ] Rate limiting on auth endpoints
 - [ ] Pytest tests for all auth endpoints
-- [ ] .env.example with all required variables
+- [x] .env.example with all required variables
 - [ ] README setup instructions for API
 
 ### V2 — Frontend
