@@ -71,3 +71,15 @@ async def startup():
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
+@app.get("/")
+def landing():
+    return {
+        "service": "Portkey Auth API",
+        "status": "running",
+        "version": "v1",
+        "routes": {
+            "graphql": "/graphql",
+            "health": "/health"
+        },
+        "description": "Lightweight SSO starter built with FastAPI and GraphQL"
+    }
