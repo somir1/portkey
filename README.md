@@ -21,8 +21,6 @@ Plug it in, customize it, ship it.
 ---
 ## Architecture
 
-## Architecture
-
         Next.js Client
                 │
                 ▼
