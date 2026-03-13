@@ -21,24 +21,22 @@ Plug it in, customize it, ship it.
 ---
 ## Architecture
 
-## Architecture
-
-Next.js Client
-        │
-        ▼
-GraphQL API
-        │
-        ▼
-FastAPI + Strawberry
-        │
-        ▼
-Authentication Layer
-        │
-        ▼
-SQLAlchemy ORM
-        │
-        ▼
-SQLite (dev) / PostgreSQL (prod)
+        Next.js Client
+                │
+                ▼
+        GraphQL API
+                │
+                ▼
+        FastAPI + Strawberry
+                │
+                ▼
+        Authentication Layer
+                │
+                ▼
+        SQLAlchemy ORM
+                │
+                ▼
+        SQLite (dev) / PostgreSQL (prod)
 
 ---
 ## Roadmap
