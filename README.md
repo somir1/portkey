@@ -58,7 +58,7 @@ Plug it in, customize it, ship it.
 - [ ] README setup instructions for API
 
 ### V2 — Frontend
-- [ ] Next.js project setup in /client
+- [x] Next.js project setup in /client
 - [ ] Apollo Client setup connected to GraphQL API
 - [ ] Register page and form
 - [ ] Login page and form
