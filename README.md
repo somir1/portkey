@@ -49,9 +49,9 @@ Plug it in, customize it, ship it.
 - [x] Register mutation
 - [x] Login mutation with JWT access + refresh token
 - [x] Logout mutation
-- [ ] Refresh token endpoint
+- [x] Refresh token endpoint
 - [x] Protected `me` query with JWT auth guard
-- [ ] Input validation and error handling
+- [x] Input validation and error handling
 - [ ] Rate limiting on auth endpoints
 - [ ] Pytest tests for all auth endpoints
 - [x] .env.example with all required variables
@@ -116,8 +116,58 @@ Plug it in, customize it, ship it.
 
 ## Quick Start
 
-Coming soon — setup instructions will be added when V1 is complete.
+### Prerequisites
+- Python 3.12
+- Git
 
+---
+
+### 1. Clone the repo
+```bash
+git clone https://github.com/somir1/portkey.git
+cd portkey
+```
+
+### 2. Set up your virtual environment
+```bash
+cd api
+python3.12 -m venv .venv
+source .venv/bin/activate
+```
+Windows:
+```bash
+.venv\Scripts\activate
+```
+
+### 3. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Set up environment variables
+```bash
+cp ../.env.example .env
+```
+Open `api/.env` and update:
+```bash
+DATABASE_URL=sqlite+aiosqlite:///./dev.db
+JWT_SECRET_KEY=your-long-random-secret-here
+JWT_ALGORITHM=HS256
+JWT_ACCESS_TOKEN_EXPIRE_MINUTES=30
+JWT_REFRESH_TOKEN_EXPIRE_DAYS=7
+APP_ENV=development
+APP_PORT=8000
+```
+
+### 5. Start the server
+```bash
+uvicorn main:app --reload
+```
+
+### 6. Open the playground
+Visit `http://localhost:8000/graphql`
+
+You should see the GraphiQL interface ready to go.
 ---
 
 ## Authentication Endpoints

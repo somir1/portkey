@@ -37,9 +37,11 @@ async def update_refresh_token(db: AsyncSession, user: User, refresh_token: str)
     await db.refresh(user)
     return user
 
+
 async def get_user_by_id(db: AsyncSession, user_id: str):
     result = await db.execute(select(User).where(User.id == user_id))
     return result.scalar_one_or_none()
+
 
 async def clear_refresh_token(db: AsyncSession, user: User):
     user.refresh_token = None

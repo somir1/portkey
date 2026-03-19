@@ -14,6 +14,7 @@ from services.auth_service import (
     verify_password,
     decode_token,
 )
+from utils.validators import validate_email, validate_password, validate_name
 
 
 @strawberry.type
@@ -45,6 +46,11 @@ class AuthMutation:
     ) -> AuthPayload:
         db = info.context["db"]
 
+        email = validate_email(email)
+        validate_password(password)
+        first_name = validate_name(first_name, "First name")
+        last_name = validate_name(last_name, "Last name")
+
         existing_user = await get_user_by_email(db, email)
         if existing_user:
             raise Exception("Email already registered")
@@ -68,6 +74,9 @@ class AuthMutation:
     @strawberry.mutation
     async def login(self, email: str, password: str, info: Info) -> AuthPayload:
         db = info.context["db"]
+
+        email = validate_email(email)
+        validate_password(password)
 
         user = await get_user_by_email(db, email)
         if not user:
@@ -116,4 +125,38 @@ class AuthMutation:
         return LogoutPayload(
             success=True,
             message="Logged out successfully",
+        )
+
+    @strawberry.mutation
+    async def refresh_token(self, token: str, info: Info) -> AuthPayload:
+        db = info.context["db"]
+
+        payload = decode_token(token)
+        if not payload:
+            raise Exception("Invalid or expired refresh token")
+
+        if payload.get("type") != "refresh":
+            raise Exception("Invalid token type")
+
+        user_id = payload.get("sub")
+        user = await get_user_by_id(db, user_id)
+
+        if not user:
+            raise Exception("User not found")
+
+        if user.refresh_token != token:
+            raise Exception("Refresh token mismatch")
+
+        new_access_token = create_access_token(user.id)
+        new_refresh_token = create_refresh_token(user.id)
+
+        await update_refresh_token(db, user, new_refresh_token)
+
+        return AuthPayload(
+            access_token=new_access_token,
+            refresh_token=new_refresh_token,
+            user_id=user.id,
+            email=user.email,
+            first_name=user.first_name,
+            last_name=user.last_name,
         )
